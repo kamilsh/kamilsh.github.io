@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/08/03/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>hexo与github搭建博客</title>
+    <url>/2020/08/03/hexo%E4%B8%8Egithub%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="hexo与github搭建博客"><a href="#hexo与github搭建博客" class="headerlink" title="hexo与github搭建博客"></a>hexo与github搭建博客</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p>下载nodejs，manjaro自带nodejs无需下载</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line"><span class="comment"># 淘宝镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 查看配置信息</span></span><br><span class="line">npm config list</span><br><span class="line"><span class="comment"># 恢复</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h2><p>新建文件夹hexo</p>
+<p>在新建文件夹中安装hexo</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装脚手架</span></span><br><span class="line">sudo npm install hexo-cli -g</span><br><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line">sudo npm install hexo --save</span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo初始化"><a href="#hexo初始化" class="headerlink" title="hexo初始化"></a>hexo初始化</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化hexo仓库，在所选文件夹中创建一个blog的文件夹，并把 hexo 相关代码下载到这个文件夹中</span></span><br><span class="line"><span class="comment"># 好像可以直接hexo init，在当前文件夹下初始化</span></span><br><span class="line">hexo init blog</span><br><span class="line"><span class="comment"># proxychains hexo init blog 克隆成功，但检出失败，或许是github下载太慢，强制代理后一下子就下好了</span></span><br><span class="line"><span class="comment"># 现在已经有blog这个文件夹了</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="comment"># 安装hexo相关组件</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo使用"><a href="#hexo使用" class="headerlink" title="hexo使用"></a>hexo使用</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 本地运行</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h2 id="git设置"><a href="#git设置" class="headerlink" title="git设置"></a>git设置</h2><p>新建仓库名<code>username.github.io</code></p>
+<p>settings===&gt;GitHub Pages===&gt;Choose a theme(等会儿有内容后才可以选)</p>
+<blockquote>
+<p>git配置</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置个人信息</span></span><br><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 生成ssh</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;xx@email.com&quot;</span></span><br><span class="line"><span class="comment"># 没要密码，就按三次回车</span></span><br><span class="line"><span class="comment"># 让ssh_agent在后台运行 </span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span> </span><br><span class="line"><span class="comment"># 添加生成的SSH KEY </span></span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示公钥</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>添加ssh密钥到github</p>
+</blockquote>
+<p>GitHub===&gt;settings===&gt;SSH and GPG keys===&gt;New SSH key===&gt;粘贴公钥===&gt;Add SSH key</p>
+<blockquote>
+<p>检查ssh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment"># 输出：Hi xxx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装拓展插件来帮助连接仓库</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地仓库与github连接"><a href="#本地仓库与github连接" class="headerlink" title="本地仓库与github连接"></a>本地仓库与github连接</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改最后的deploy</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:xxx/xxx.github.io.git</span> <span class="comment"># 仓库的ssh地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h2><p>在blog文件夹下</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;article&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者在blog/source/_posts下新建md文件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清理</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 发布</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="博客配置"><a href="#博客配置" class="headerlink" title="博客配置"></a>博客配置</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> </span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><blockquote>
+<p>更换diaspora主题</p>
+</blockquote>
+<p><a href="https://github.com/Fechin/hexo-theme-diaspora">diaspora GitHub</a></p>
+<p>新建文章模板</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: My awesome title</span><br><span class="line">date: 2016-10-12 18:38:45</span><br><span class="line">categories: </span><br><span class="line">    - 分类1</span><br><span class="line">    - 分类2</span><br><span class="line">tags: </span><br><span class="line">    - 标签1</span><br><span class="line">    - 标签2</span><br><span class="line">mp3: http://domain.com/awesome.mp3</span><br><span class="line">cover: http://domain.com/awesome.jpg</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>manjaro</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Manjaro添加日语输入法</title>
+    <url>/2020/08/03/Manjaro%E6%B7%BB%E5%8A%A0%E6%97%A5%E8%AF%AD%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="下载日语包"><a href="#下载日语包" class="headerlink" title="下载日语包"></a>下载日语包</h2><p>系统设置 本地化设定 添加日语</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yay -S fcitx-mozc</span><br></pre></td></tr></table></figure>
+
+<p>注销 重新登录</p>
+<h2 id="配置当前输入法"><a href="#配置当前输入法" class="headerlink" title="配置当前输入法"></a>配置当前输入法</h2><p>发现已经有Mozc了</p>
+<p>但是需要右键点击右上角的键盘——输入法——选择，才可以切换</p>
+<p>成功しました？</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>附加组件——输入法选择器——配置——全局选择——切换至第？个输入法快捷键ctrl+？</p>
+<p>目前：</p>
+<p>ctrl+1——中文</p>
+<p>ctrl+2——日本語</p>
+<p>ctrl+3——english</p>
+<p>也可以按shift切换英文</p>
+]]></content>
+      <categories>
+        <category>manjaro</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+        <tag>Japanese</tag>
+      </tags>
+  </entry>
+</search>
