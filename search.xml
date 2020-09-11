@@ -103,4 +103,53 @@
         <tag>Japanese</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Manjaro开机挂载NTFS硬盘</title>
+    <url>/2020/08/17/Manjaro%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98/</url>
+    <content><![CDATA[<h1 id="Manjaro开机挂载NTFS硬盘"><a href="#Manjaro开机挂载NTFS硬盘" class="headerlink" title="Manjaro开机挂载NTFS硬盘"></a>Manjaro开机挂载NTFS硬盘</h1><p>因为是装的双系统，不可能把NTFS格式的硬盘转换成ext4格式，所以利用<code>ntfs-3g</code>（在Manjaro中已默认安装）挂载NTFS格式硬盘</p>
+<blockquote>
+<p>查看需要挂载的硬盘信息</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo fdisk -l</span><br><span class="line">sudo blkid -o list</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Disk /dev/sda：931.51 GiB，1000204886016 字节，1953525168 个扇区</span><br><span class="line">磁盘型号：</span><br><span class="line">单元：扇区 / 1 * 512 = 512 字节</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 4096 字节</span><br><span class="line">I/O 大小(最小/最佳)：4096 字节 / 4096 字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">磁盘标识符：</span><br><span class="line"></span><br><span class="line">设备             起点       末尾       扇区   大小 类型</span><br><span class="line">/dev/sda1        2048 1030387711 1030385664 491.3G Microsoft 基本数据</span><br><span class="line">/dev/sda2  1030387712 1644793855  614406144   293G Microsoft 基本数据</span><br><span class="line">/dev/sda3  1644795904 1926375423  281579520 134.3G Microsoft 基本数据</span><br><span class="line">/dev/sda4  1926377472 1953523711   27146240  12.9G Microsoft 基本数据</span><br></pre></td></tr></table></figure>
+
+<p>挂载/dev/sda1,2,3</p>
+<blockquote>
+<p>查看uuid</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ls -l /dev/disk/by-uuid/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 628CC26D8CC23AF5 -&gt; ../../sda1</span><br><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 2A361FCA361F95C3 -&gt; ../../sda2</span><br><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 0C80F25880F2482A -&gt; ../../sda3</span><br></pre></td></tr></table></figure>
+
+<p>所以对应uuid：628CC26D8CC23AF5; 2A361FCA361F95C3；0C80F25880F2482A</p>
+<blockquote>
+<p>编辑/etc/fstab</p>
+</blockquote>
+<p>新建一个~/data文件夹，将sda1挂载在这个地方</p>
+<p>fstab中添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">挂载分区的位置        挂载点分区        格式          设置         备份        自检</span><br><span class="line">&lt;file system&gt;        &lt;mout point&gt;    &lt;type&gt;        &lt;options&gt;    &lt;dump&gt;        &lt;pass&gt; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">UUID=628CC26D8CC23AF5 /home/kami/data          ntfs    defaults 0 0</span><br><span class="line"><span class="comment"># 注意空格这些，可以复制上一行的数据改，观察Kate打开的高亮，和上面不一样就是有问题（比如我第一次的就把data ntfs defaults 识别成了一个目录...）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>收尾</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo mount -a</span><br></pre></td></tr></table></figure>
+
+<p>不报错就没问题</p>
+<p>另外几个分区同理挂载即可</p>
+<p>最后重启</p>
+<p>参考资料：</p>
+<p><a href="https://blog.csdn.net/weixin_43840399/article/details/93475915">Manjaro开机挂载NTFS硬盘</a></p>
+<p><a href="%5Bhttps://wiki.archlinux.org/index.php/NTFS-3G_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)%5D(https://wiki.archlinux.org/index.php/NTFS-3G_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">NTFS-3G</a></p>
+<p><a href="https://achuan.io/2020-04-09-Manjaro-KDE.html">Manjaro KDE 调教日记</a></p>
+]]></content>
+      <categories>
+        <category>manjaro</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+      </tags>
+  </entry>
 </search>
