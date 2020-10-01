@@ -168,7 +168,7 @@
 <blockquote>
 <p>在Pytorch中查看cuda版本</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.version,cuda)</span><br><span class="line"><span class="comment"># print(torch.cuda_version)也可以</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">print(torch.version.cuda)</span><br><span class="line"><span class="comment"># print(torch.cuda_version)也可以</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -199,7 +199,7 @@
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
 
 <h2 id="Manjaro-Linux"><a href="#Manjaro-Linux" class="headerlink" title="Manjaro Linux"></a>Manjaro Linux</h2><p>使用anaconda来管理环境了</p>
-<p><code>conda activate [env name]</code>后python -m ipykernel install –user –name 环境名称 –display-name “Python (环境名称)”</p>
+<p><code>conda activate [env name]</code>后<code>python -m ipykernel install --user --name 环境名称 --display-name &quot;Python (环境名称)&quot;</code></p>
 <p>配置到了<code>~/.local/share/jupyter/kernels/</code>位置</p>
 <p>激活</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda activate xx</span><br></pre></td></tr></table></figure>
