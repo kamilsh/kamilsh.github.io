@@ -5,18 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Manjaro添加日语输入法 - ふつう の BLOG</title>
+    <title>windows terminal设置alias别名 - ふつう の BLOG</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="下载日语包系统设置 本地化设定 添加日语
-1yay -S fcitx-mozc
+    <meta name="description" content="windows terminal设置alias别名
+打开 PowerShell ，运行 echo $profile，会输出一个文件路径，创建这个文件。
 
-注销 重新登录
-配置当前输入法发现已经有Mozc了
-但是需要右键点击右上角的键盘——输入法——选择，才可以切换
-成功,"> 
+用notepad++打开这个文件，按如下格式,"> 
     <meta name="author" content="Li Suhang"> 
     <link rel="alternative" href="atom.xml" title="ふつう の BLOG" type="application/atom+xml"> 
     
@@ -44,7 +41,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">Manjaro添加日语输入法</h3>
+    <h3 class="subtitle">windows terminal设置alias别名</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -59,28 +56,30 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">Manjaro添加日语输入法</h1>
+        <h1 class="title">windows terminal设置alias别名</h1>
         <div class="stuff">
-            <span>八月 03, 2020</span>
+            <span>九月 20, 2020</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Japanese/" rel="tag">Japanese</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/manjaro/" rel="tag">manjaro</a></li></ul>
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/terminal/" rel="tag">terminal</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h2 id="下载日语包"><a href="#下载日语包" class="headerlink" title="下载日语包"></a>下载日语包</h2><p>系统设置 本地化设定 添加日语</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-mozc</span><br></pre></td></tr></table></figure>
+            <h1 id="windows-terminal设置alias别名"><a href="#windows-terminal设置alias别名" class="headerlink" title="windows terminal设置alias别名"></a>windows terminal设置alias别名</h1><ol>
+<li><p>打开 PowerShell ，运行 <code>echo $profile</code>，会输出一个文件路径，创建这个文件。</p>
+</li>
+<li><p>用notepad++打开这个文件，按如下格式设置别名：</p>
+</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">alias</span>别名</span> &#123;命令&#125;</span><br></pre></td></tr></table></figure>
 
-<p>注销 重新登录</p>
-<h2 id="配置当前输入法"><a href="#配置当前输入法" class="headerlink" title="配置当前输入法"></a>配置当前输入法</h2><p>发现已经有Mozc了</p>
-<p>但是需要右键点击右上角的键盘——输入法——选择，才可以切换</p>
-<p>成功しました？</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>附加组件——输入法选择器——配置——全局选择——切换至第？个输入法快捷键ctrl+？</p>
-<p>目前：</p>
-<p>ctrl+1——中文</p>
-<p>ctrl+2——日本語</p>
-<p>ctrl+3——english</p>
-<p>也可以按shift切换英文</p>
+<p>例如</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nb</span></span> &#123;jupyter notebook&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>以管理员身份打开 PowerShell，执行 <code>Set-ExecutionPolicy RemoteSigned</code>。</li>
+<li>重启Powershell</li>
+</ol>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

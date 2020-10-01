@@ -5,18 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Manjaro添加日语输入法 - ふつう の BLOG</title>
+    <title>jupyter notebook添加更改内核 - ふつう の BLOG</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="下载日语包系统设置 本地化设定 添加日语
-1yay -S fcitx-mozc
+    <meta name="description" content="jupyter notebook添加更改内核Windows10终端输入
+12jupyter kernelspec list# ipython kernelspec list 将会被废弃
 
-注销 重新登录
-配置当前输入法发现已经有Mozc了
-但是需要右键点击右上角的键盘——输入法——选择，才可以切换
-成功,"> 
+1234A,"> 
     <meta name="author" content="Li Suhang"> 
     <link rel="alternative" href="atom.xml" title="ふつう の BLOG" type="application/atom+xml"> 
     
@@ -44,7 +41,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">Manjaro添加日语输入法</h3>
+    <h3 class="subtitle">jupyter notebook添加更改内核</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -59,28 +56,46 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">Manjaro添加日语输入法</h1>
+        <h1 class="title">jupyter notebook添加更改内核</h1>
         <div class="stuff">
-            <span>八月 03, 2020</span>
+            <span>十月 01, 2020</span>
             
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Japanese/" rel="tag">Japanese</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/manjaro/" rel="tag">manjaro</a></li></ul>
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <h2 id="下载日语包"><a href="#下载日语包" class="headerlink" title="下载日语包"></a>下载日语包</h2><p>系统设置 本地化设定 添加日语</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-mozc</span><br></pre></td></tr></table></figure>
+            <h1 id="jupyter-notebook添加更改内核"><a href="#jupyter-notebook添加更改内核" class="headerlink" title="jupyter notebook添加更改内核"></a>jupyter notebook添加更改内核</h1><h2 id="Windows10"><a href="#Windows10" class="headerlink" title="Windows10"></a>Windows10</h2><p>终端输入</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec list</span><br><span class="line"><span class="comment"># ipython kernelspec list 将会被废弃</span></span><br></pre></td></tr></table></figure>
 
-<p>注销 重新登录</p>
-<h2 id="配置当前输入法"><a href="#配置当前输入法" class="headerlink" title="配置当前输入法"></a>配置当前输入法</h2><p>发现已经有Mozc了</p>
-<p>但是需要右键点击右上角的键盘——输入法——选择，才可以切换</p>
-<p>成功しました？</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>附加组件——输入法选择器——配置——全局选择——切换至第？个输入法快捷键ctrl+？</p>
-<p>目前：</p>
-<p>ctrl+1——中文</p>
-<p>ctrl+2——日本語</p>
-<p>ctrl+3——english</p>
-<p>也可以按shift切换英文</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Available kernels:</span><br><span class="line">  python3.7.8    C:\Users\57211\AppData\Roaming\jupyter\kernels\python3.7.8</span><br><span class="line">  pytorch1.6     C:\Users\57211\AppData\Roaming\jupyter\kernels\pytorch1.6</span><br><span class="line">  python3        c:\users\57211\appdata\<span class="built_in">local</span>\programs\python\python37\share\jupyter\kernels\python3</span><br></pre></td></tr></table></figure>
+
+<p>进入相应目录可以更改对应的json文件</p>
+<p><strong>但是注意不要在浏览器的notebook里pip install，因为浏览器中pip list出的是系统的python，或许是因为notebook的路径下只能找到系统的python。而在pycharm里pip list 就是当前内核的python环境，因为pycharm能自动激活相应的虚拟环境。</strong></p>
+<blockquote>
+<p>终端进入虚拟环境</p>
+</blockquote>
+<p>进入虚拟环境所在目录的Scripts文件夹下，执行<code>activate</code></p>
+<p>激活</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">H</span>:</span><br><span class="line"><span class="built_in">cd</span> .\workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="Manjaro-Linux"><a href="#Manjaro-Linux" class="headerlink" title="Manjaro Linux"></a>Manjaro Linux</h2><p>使用anaconda来管理环境了</p>
+<p><code>conda activate [env name]</code>后python -m ipykernel install –user –name 环境名称 –display-name “Python (环境名称)”</p>
+<p>配置到了<code>~/.local/share/jupyter/kernels/</code>位置</p>
+<p>激活</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate xx</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Pycharm中运行jupyter-notebook"><a href="#Pycharm中运行jupyter-notebook" class="headerlink" title="Pycharm中运行jupyter notebook"></a>Pycharm中运行jupyter notebook</h2><p>用Pycharm打开ipynb文件——&gt;终端输入jupyter notebook，复制URL——&gt;点击<em>配置jupyter服务器</em>——&gt;输入<em>配置的服务器</em>从终端复制的URL</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">

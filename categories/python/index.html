@@ -5,18 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Manjaro添加日语输入法 - ふつう の BLOG</title>
+    <title>分类: python - ふつう の BLOG</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="下载日语包系统设置 本地化设定 添加日语
-1yay -S fcitx-mozc
-
-注销 重新登录
-配置当前输入法发现已经有Mozc了
-但是需要右键点击右上角的键盘——输入法——选择，才可以切换
-成功,"> 
+    
     <meta name="author" content="Li Suhang"> 
     <link rel="alternative" href="atom.xml" title="ふつう の BLOG" type="application/atom+xml"> 
     
@@ -39,87 +33,117 @@
 <body class="loading">
     <span id="config-title" style="display:none">ふつう の BLOG</span>
     <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://yoursite.com"></a>
-    <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">Manjaro添加日语输入法</h3>
-    <div class="social">
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
-    </div>
-    <div class="scrollbar"></div>
+    <div class="nav">
+    <ul id="menu-menu" class="menu">
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="//" title="首页" target="_blank" rel="noopener">首页</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/categories/" title="分类" target="_blank" rel="noopener">分类</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/tags/" title="标签" target="_blank" rel="noopener">标签</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/archives/" title="归档" target="_blank" rel="noopener">归档</a>
+        </li>
+        
+        <li class="pview menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/about/" title="关于" target="_blank" rel="noopener">关于</a>
+        </li>
+        
+    </ul>
+	<span class="target"></span>
+	<center>
+	<div class="hitokoto">
+		<span class="typed" id="hitokoto" data-st="true"></span>
+	</div>
+	</center>
+	
+	<p class="footerlinks">
+		<a href="#" class="iconfont icon-null"></a>
+		
+            <a href="https://github.com/kamilsh" title="github" class="iconfont icon-github" target="_blank" rel="noopener"> </a>
+        
+            <a href="/kamilsh0507@gmail.com" title="email" class="iconfont icon-email" target="_blank" rel="noopener"> </a>
+        
+		<a href="#" class="iconfont icon-null"></a>
+	</p>
+	
+    <p id="copyright">
+        &copy; 2020 Li Suhang.
+        <span> | </span>Powered by <a href="https://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        <span> | </span>Theme <a href="https://github.com/Fechin/hexo-theme-diaspora" title="Diaspora" target="_blank" rel="noopener">Diaspora</a> by Fechin
+		
+    </p>
 </div>
 
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">Manjaro添加日语输入法</h1>
-        <div class="stuff">
-            <span>八月 03, 2020</span>
-            
-  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Japanese/" rel="tag">Japanese</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/manjaro/" rel="tag">manjaro</a></li></ul>
-
-
+<div id="container">
+    
+<div id="screen">
+    <div id="mark">
+        <div class="layer" data-depth="0.4">
+            <img src="/img/welcome_cover.png" id="cover" crossorigin="anonymous" width="1920" height="1080">
         </div>
-        <div class="content markdown">
-            <h2 id="下载日语包"><a href="#下载日语包" class="headerlink" title="下载日语包"></a>下载日语包</h2><p>系统设置 本地化设定 添加日语</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx-mozc</span><br></pre></td></tr></table></figure>
-
-<p>注销 重新登录</p>
-<h2 id="配置当前输入法"><a href="#配置当前输入法" class="headerlink" title="配置当前输入法"></a>配置当前输入法</h2><p>发现已经有Mozc了</p>
-<p>但是需要右键点击右上角的键盘——输入法——选择，才可以切换</p>
-<p>成功しました？</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>附加组件——输入法选择器——配置——全局选择——切换至第？个输入法快捷键ctrl+？</p>
-<p>目前：</p>
-<p>ctrl+1——中文</p>
-<p>ctrl+2——日本語</p>
-<p>ctrl+3——english</p>
-<p>也可以按shift切换英文</p>
-
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                        
-                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
-                        
-                    
-                        
-                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
-                        
-                    
-                </ul>
-            
+    </div>
+    <div id="vibrant">
+        <svg viewBox="0 0 2880 1620" height="100%" preserveAspectRatio="xMaxYMax slice">
+            <polygon opacity="0.7" points="2000,1620 0,1620 0,0 600,0 "/>
+        </svg>
+        <div></div>
+    </div>
+    <div id="header">
+        <div>
+			
+			<div class="iconfont icon-search switchsearch" href="/search/" title="搜索"></div>
+			
+            <div class="iconfont icon-menu switchmenu"></div>
         </div>
+    </div>
+    
+    <div id="post0">
+        <p>十月 01, 2020</p>
+        <h2><a href="/2020/10/01/jupyter%20notebook%E6%B7%BB%E5%8A%A0%E5%86%85%E6%A0%B8/" title="jupyter notebook添加更改内核" class="posttitle">jupyter notebook添加更改内核</a></h2>
+        <p class="summary">jupyter notebook添加更改内核Windows10终端输入
+12jupyter kernelspec ...</p>
+    </div>
+    
+</div>
+
+    <div id="primary">
         
-    <div id='gitalk-container' class="comment link"
-		data-enable='false'
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+<div class="post">
+    <a href="/2020/09/15/Windows%E4%B8%8B%E5%88%87%E6%8D%A2cuda%E7%89%88%E6%9C%AC/" title="Windows下切换cuda版本">
+        <img src="https://images.pexels.com/photos/3225524/pexels-photo-3225524.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="cover" width="680" height="440">
+    </a>
+    <div class="else">
+        <p>九月 15, 2020</p>
+        <h3><a href="/2020/09/15/Windows%E4%B8%8B%E5%88%87%E6%8D%A2cuda%E7%89%88%E6%9C%AC/" title="Windows下切换cuda版本" class="posttitle">Windows下切换cuda版本</a></h3>
+        <p>Windows下切换cuda版本
+查看现在cuda版本
+
+1nvcc --version
+
+
+更改系统环境
+
+更改CUDA_PATH和NVCUDASAMP...</p>
+    </div>
+</div>
 
 
     </div>
     
 </div>
+<div id="preview"></div>
 
 
-    </div>
-</div>
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8}});</script></body>
 
 
