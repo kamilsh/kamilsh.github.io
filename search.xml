@@ -246,4 +246,111 @@
         <tag>terminal</tag>
       </tags>
   </entry>
+  <entry>
+    <title>双系统共用蓝牙</title>
+    <url>/2020/10/02/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%85%B1%E7%94%A8%E8%93%9D%E7%89%99/</url>
+    <content><![CDATA[<h1 id="双系统共用蓝牙"><a href="#双系统共用蓝牙" class="headerlink" title="双系统共用蓝牙"></a>双系统共用蓝牙</h1><h2 id="配对蓝牙"><a href="#配对蓝牙" class="headerlink" title="配对蓝牙"></a>配对蓝牙</h2><ul>
+<li>Linux配对蓝牙，然后在Windows上配对蓝牙</li>
+</ul>
+<h2 id="Windows下记录蓝牙信息"><a href="#Windows下记录蓝牙信息" class="headerlink" title="Windows下记录蓝牙信息"></a>Windows下记录蓝牙信息</h2><ul>
+<li><p>下载PSTools工具并解压</p>
+</li>
+<li><p>管理员身份运行cmd</p>
+</li>
+<li><p>cd至PSTools文件夹</p>
+</li>
+<li><p>输入<code>Psexec64.exe -s -i regedit</code>打开注册表</p>
+</li>
+<li><p>打开<code>计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\xxxxxxxxxxxx(电脑蓝牙地址)\yyyyyyyyyyyy(设备蓝牙地址)</code></p>
+<p>键盘耳机和鼠标的格式是不同的，键盘耳机只有1个值，而鼠标有多个值</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">40bc6000e11a（耳机）</td>
+<td>F20CDD8DF01BF99FEB47562D599B49CF</td>
+</tr>
+<tr>
+<td align="left">f47335018ee1（键盘）</td>
+<td>33A06F0D773700CA15CBF78B1A98547B</td>
+</tr>
+<tr>
+<td align="left">ee15ab4c8714（鼠标）</td>
+<td>LTK    33 08 53 7b 84 70 c8 93 1a e2 0a f3 f5 bd ae 0d<br />ERand    bd f5 1f 15 57 9e ee 72<br />EDIV    0xa120<br />CSRK    37 25 ee e8 86 72 fa 5f a4 4b e1 ae 73 e0 2d 2d<br />IRK    c9 14 31 12 48 f2 9c ad - 95 1f 35 10 26 09 ec 2d</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="Linux下更改蓝牙信息"><a href="#Linux下更改蓝牙信息" class="headerlink" title="Linux下更改蓝牙信息"></a>Linux下更改蓝牙信息</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">su</span><br><span class="line"><span class="built_in">cd</span> /var/lib/bluetooth/xxxxxxxxxxxx(电脑蓝牙地址)/yyyyyyyyyyyy(设备蓝牙地址)</span><br><span class="line">nano info</span><br></pre></td></tr></table></figure>
+
+<p>对于蓝牙键盘（罗技K380）和蓝牙耳机（Beats），只需修改[LinkKey]的Key为windows注册表中的数据</p>
+<p>对于蓝牙鼠标，就要麻烦很多了</p>
+<p>参数对应表：</p>
+<table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LTK</td>
+<td>[LongTermKey] Key</td>
+</tr>
+<tr>
+<td>IRK</td>
+<td>[IdentityResolvingKey] Key</td>
+</tr>
+<tr>
+<td>CSRK</td>
+<td>[LocalSignatureKey] Key</td>
+</tr>
+<tr>
+<td>EDIV</td>
+<td>[LongTermKey] EDiv</td>
+</tr>
+<tr>
+<td>ERand</td>
+<td>[LongTermKey] Rand</td>
+</tr>
+</tbody></table>
+<p>LTK IRK CSRK 都只是简单的去掉分隔符并转换为大写</p>
+<p>EDIV 和 ERand 需要从十六进制转换为十进制，且Erand大小端倒序</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Erand=bd f5 1f 15 57 9e ee 72 转换</span></span><br><span class="line"><span class="built_in">echo</span> $((<span class="number">16</span>#$(echo bd,f5,<span class="number">1</span>f,<span class="number">15</span>,<span class="number">57</span>,<span class="number">9</span>e,ee,<span class="number">72</span>|tr , &#x27;\n&#x27;|tac|tr -d &#x27;\n&#x27;)))</span><br><span class="line"><span class="comment"># 8281730861634680253</span></span><br></pre></td></tr></table></figure>
+
+<p>还有1个坑就是蓝牙鼠标在Linux和Windows下地址不一样，需要改成Windows下的地址<code>mv EE\:14\:AC\:4B\:87\:14/ EE\:15\:AB\:4C\:87\:14/</code></p>
+<h2 id="重启蓝牙"><a href="#重启蓝牙" class="headerlink" title="重启蓝牙"></a>重启蓝牙</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart bluetooth</span><br></pre></td></tr></table></figure>
+
+<p>现在可以双系统使用蓝牙了</p>
+<h2 id="Linux下读取Windows注册表"><a href="#Linux下读取Windows注册表" class="headerlink" title="Linux下读取Windows注册表"></a>Linux下读取Windows注册表</h2><p><code>chntpw</code>可以读取windows注册表</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">chntpw -e SYSTEM</span><br><span class="line">&gt; <span class="built_in">cd</span> <span class="built_in">cd</span> ControlSet001\Services\BTHPORT\Parameters\Keys</span><br><span class="line">&gt; ls</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://unix.stackexchange.com/questions/255509/bluetooth-pairing-on-dual-boot-of-windows-linux-mint-ubuntu-stop-having-to-p">蓝牙键盘配置</a></p>
+<p><a href="https://blog.nanpuyue.com/2018/040.html">蓝牙鼠标配置</a></p>
+<blockquote>
+<p>附：</p>
+</blockquote>
+<p>蓝牙鼠标最终配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name&#x3D;Designer Mouse</span><br><span class="line">Appearance&#x3D;0x03c2</span><br><span class="line">AddressType&#x3D;static</span><br><span class="line">SupportedTechnologies&#x3D;LE;</span><br><span class="line">Trusted&#x3D;true</span><br><span class="line">Blocked&#x3D;false</span><br><span class="line">WakeAllowed&#x3D;true</span><br><span class="line">Services&#x3D;00001800-0000-1000-8000-00805f9b34fb;00001801-0000-1000-8000-00805f9b34fb;0000180a-0000-1000-8000-00805f9b34fb;0000180f-0000-1000-8000-00805f9b34fb;00001812-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[IdentityResolvingKey]</span><br><span class="line">Key&#x3D;C914311248F29CAD951F35102609EC2D</span><br><span class="line"></span><br><span class="line">[LocalSignatureKey]</span><br><span class="line">Key&#x3D;3725EEE88672FA5FA44BE1AE73E02D2D</span><br><span class="line">Counter&#x3D;0</span><br><span class="line">Authenticated&#x3D;false</span><br><span class="line"></span><br><span class="line">[LongTermKey]</span><br><span class="line">Key&#x3D;3308537B8470C8931AE20AF3F5BDAE0D</span><br><span class="line">Authenticated&#x3D;0</span><br><span class="line">EncSize&#x3D;16</span><br><span class="line">EDiv&#x3D;41248</span><br><span class="line">Rand&#x3D;8281730861634680253</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source&#x3D;2</span><br><span class="line">Vendor&#x3D;1118</span><br><span class="line">Product&#x3D;2053</span><br><span class="line">Version&#x3D;288</span><br><span class="line"></span><br><span class="line">[ConnectionParameters]</span><br><span class="line">MinInterval&#x3D;6</span><br><span class="line">MaxInterval&#x3D;6</span><br><span class="line">Latency&#x3D;60</span><br><span class="line">Timeout&#x3D;300</span><br><span class="line"></span><br><span class="line">[ServiceChanged]</span><br><span class="line">CCC_LE&#x3D;2</span><br></pre></td></tr></table></figure>
+
+<p>蓝牙键盘最终配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name&#x3D;Keyboard K380</span><br><span class="line">Class&#x3D;0x000540</span><br><span class="line">SupportedTechnologies&#x3D;BR&#x2F;EDR;</span><br><span class="line">Trusted&#x3D;true</span><br><span class="line">Blocked&#x3D;false</span><br><span class="line">WakeAllowed&#x3D;true</span><br><span class="line">Services&#x3D;00001000-0000-1000-8000-00805f9b34fb;00001124-0000-1000-8000-00805f9b34fb;00001200-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[LinkKey]</span><br><span class="line">Key&#x3D;33A06F0D773700CA15CBF78B1A98547B</span><br><span class="line">Type&#x3D;5</span><br><span class="line">PINLength&#x3D;0</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source&#x3D;2</span><br><span class="line">Vendor&#x3D;1133</span><br><span class="line">Product&#x3D;45890</span><br><span class="line">Version&#x3D;16897</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>manjaro, windows</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+      </tags>
+  </entry>
 </search>
