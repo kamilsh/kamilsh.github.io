@@ -353,4 +353,111 @@
         <tag>manjaro</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Manjaro开启chromium硬解</title>
+    <url>/2020/10/02/Manjaro%E5%BC%80%E5%90%AFchromium%E7%A1%AC%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="Manjaro开启chromium硬解"><a href="#Manjaro开启chromium硬解" class="headerlink" title="Manjaro开启chromium硬解"></a>Manjaro开启chromium硬解</h1>]]></content>
+      <categories>
+        <category>manjaro</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用mpv在线播放B站大会员专享</title>
+    <url>/2020/10/13/%E4%BD%BF%E7%94%A8mpv%E5%9C%A8%E7%BA%BF%E6%92%AD%E6%94%BEB%E7%AB%99%E5%A4%A7%E4%BC%9A%E5%91%98%E4%B8%93%E4%BA%AB/</url>
+    <content><![CDATA[<h1 id="使用mpv在线播放B站大会员专享"><a href="#使用mpv在线播放B站大会员专享" class="headerlink" title="使用mpv在线播放B站大会员专享"></a>使用mpv在线播放B站大会员专享</h1><blockquote>
+<p> 安装工具</p>
+</blockquote>
+<p><code>you-get</code></p>
+<p> <code>mpv</code> </p>
+<p><code>Get cookie.txt</code> chrome插件</p>
+<blockquote>
+<p> 获取cookie.txt</p>
+</blockquote>
+<p>使用大会员帐号登录B站，用<code>Get cookie.txt</code>插件导出cookie.txt</p>
+<blockquote>
+<p>you-get解析真实地址</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># you-get &lt;视频地址&gt; -c &lt;cookie文件地址&gt; -i</span></span><br><span class="line">you-get -c /xx/bilibili.com_cookies.txt -i https://www.bilibili.com/video/avxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">you-get -c /xx/bilibili.com_cookies.txt -u https://www.bilibili.com/video/av754994469 --format=dash-flv_p60</span><br></pre></td></tr></table></figure>
+
+<p>解析出来两个链接，第一个是视频链接，第二个是音频链接</p>
+<blockquote>
+<p>mpv播放</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">mpv --no-ytdl --http-header-fields=<span class="string">&quot;referer: https://www.bilibili.com&quot;</span> video_url --audio-file=audio_url</span><br><span class="line"><span class="comment"># 链接不用带引号</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mpv快捷键</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[</td>
+<td>0.9091倍速播放</td>
+</tr>
+<tr>
+<td>]</td>
+<td>1.1倍速播放</td>
+</tr>
+<tr>
+<td>.</td>
+<td>下一帧</td>
+</tr>
+<tr>
+<td>,</td>
+<td>上一帧</td>
+</tr>
+<tr>
+<td>9或/</td>
+<td>音量-2</td>
+</tr>
+<tr>
+<td>0或*</td>
+<td>音量+2</td>
+</tr>
+<tr>
+<td>f</td>
+<td>切换全屏</td>
+</tr>
+<tr>
+<td>up</td>
+<td>快进60秒</td>
+</tr>
+<tr>
+<td>down</td>
+<td>后退60秒</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实操</p>
+</blockquote>
+<p>观看番剧</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取番剧信息</span></span><br><span class="line">you-get -c /home/kami/data/data/backup/bilibili.com_cookies.txt -i https://www.bilibili.com/bangumi/play/ep341209 [--playlist]</span><br><span class="line"><span class="comment"># 获取真实地址</span></span><br><span class="line">you-get -c /home/kami/data/data/backup/bilibili.com_cookies.txt -u https://www.bilibili.com/bangumi/play/ep341209 --format=dash-hdflv2 [--playlist]</span><br><span class="line"><span class="comment"># 加上--playlist会解析当前番剧所有集数的地址，只看某一集就不用加，直接解析那一集的url即可</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">mpv --no-ytdl --http-header-fields=<span class="string">&quot;referer: https://www.bilibili.com&quot;</span> video_url --audio-file=audio_url</span><br></pre></td></tr></table></figure>
+
+<p>成功播放！</p>
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://wiki.archlinux.org/index.php/Bilibili_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E4%BD%BF%E7%94%A8_you-get_%E5%92%8C_mpv">Bilibili (简体中文)</a></p>
+<p><a href="https://fspark.me/archives/Linux-mpv-bilibili-bangumi-you-get.html">Linux下用mpv在B站看番（二）：you-get</a></p>
+<p><a href="https://mazhuang.org/wiki/mpv/">mpv快捷键</a></p>
+]]></content>
+      <categories>
+        <category>manjaro</category>
+      </categories>
+      <tags>
+        <tag>manjaro</tag>
+      </tags>
+  </entry>
 </search>
