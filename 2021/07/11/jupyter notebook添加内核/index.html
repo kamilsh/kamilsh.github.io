@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>jupyter notebook添加更改内核 - Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="jupyter notebook添加更改内核Windows10
+添加内核
+
+123python -m ipykernel install --user --name 环境名称 --display-n,"> 
+    <meta name="author" content="Lee"> 
+    <link rel="alternative" href="atom.xml" title="Blog" type="application/atom+xml"> 
+    
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">jupyter notebook添加更改内核</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">jupyter notebook添加更改内核</h1>
+        <div class="stuff">
+            <span>七月 11, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="jupyter-notebook添加更改内核"><a href="#jupyter-notebook添加更改内核" class="headerlink" title="jupyter notebook添加更改内核"></a>jupyter notebook添加更改内核</h1><h2 id="Windows10"><a href="#Windows10" class="headerlink" title="Windows10"></a>Windows10</h2><blockquote>
+<p>添加内核</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m ipykernel install --user --name 环境名称 --display-name <span class="string">&quot;Python (环境名称)&quot;</span></span><br><span class="line"><span class="comment"># --name 环境名称(这个是文件夹名)</span></span><br><span class="line"><span class="comment"># --display-name &quot;Python (环境名称)（这个是解释器名）</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看内核</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jupyter kernelspec list</span><br><span class="line"><span class="comment"># ipython kernelspec list 将会被废弃</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Available kernels:</span><br><span class="line">  python3.7.8    C:\Users\57211\AppData\Roaming\jupyter\kernels\python3.7.8</span><br><span class="line">  pytorch1.6     C:\Users\57211\AppData\Roaming\jupyter\kernels\pytorch1.6</span><br><span class="line">  python3        c:\users\57211\appdata\<span class="built_in">local</span>\programs\python\python37\share\jupyter\kernels\python3</span><br></pre></td></tr></table></figure>
+
+<p>进入相应目录可以更改对应的json文件</p>
+<p><strong>但是注意不要在浏览器的notebook里pip install，因为浏览器中pip list出的是系统的python，或许是因为notebook的路径下只能找到系统的python。而在pycharm里pip list 就是当前内核的python环境，因为pycharm能自动激活相应的虚拟环境。</strong></p>
+<blockquote>
+<p>终端进入虚拟环境</p>
+</blockquote>
+<p>进入虚拟环境所在目录的Scripts文件夹下，执行<code>activate</code></p>
+<p>激活</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> .\workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="Manjaro-Linux"><a href="#Manjaro-Linux" class="headerlink" title="Manjaro Linux"></a>Manjaro Linux</h2><p>使用anaconda来管理环境了</p>
+<p><code>conda activate [env name]</code>后<code>python -m ipykernel install --user --name 环境名称 --display-name &quot;Python (环境名称)&quot;</code></p>
+<p>配置到了<code>~/.local/share/jupyter/kernels/</code>位置</p>
+<p>激活</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate xx</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Pycharm中运行jupyter-notebook"><a href="#Pycharm中运行jupyter-notebook" class="headerlink" title="Pycharm中运行jupyter notebook"></a>Pycharm中运行jupyter notebook</h2><p>用Pycharm打开ipynb文件——&gt;终端输入jupyter notebook，复制URL——&gt;点击<em>配置jupyter服务器</em>——&gt;输入<em>配置的服务器</em>从终端复制的URL</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8}});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>双系统共用蓝牙 - Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="双系统共用蓝牙配对蓝牙
+Linux配对蓝牙，然后在Windows上配对蓝牙
+
+Windows下记录蓝牙信息
+下载PSTools工具并解压
+
+管理员身份运行cmd
+
+cd至PSTools文件夹
+
+输入,"> 
+    <meta name="author" content="Lee"> 
+    <link rel="alternative" href="atom.xml" title="Blog" type="application/atom+xml"> 
+    
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">双系统共用蓝牙</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">双系统共用蓝牙</h1>
+        <div class="stuff">
+            <span>七月 11, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="双系统共用蓝牙"><a href="#双系统共用蓝牙" class="headerlink" title="双系统共用蓝牙"></a>双系统共用蓝牙</h1><h2 id="配对蓝牙"><a href="#配对蓝牙" class="headerlink" title="配对蓝牙"></a>配对蓝牙</h2><ul>
+<li>Linux配对蓝牙，然后在Windows上配对蓝牙</li>
+</ul>
+<h2 id="Windows下记录蓝牙信息"><a href="#Windows下记录蓝牙信息" class="headerlink" title="Windows下记录蓝牙信息"></a>Windows下记录蓝牙信息</h2><ul>
+<li><p>下载PSTools工具并解压</p>
+</li>
+<li><p>管理员身份运行cmd</p>
+</li>
+<li><p>cd至PSTools文件夹</p>
+</li>
+<li><p>输入<code>Psexec64.exe -s -i regedit</code>打开注册表</p>
+</li>
+<li><p>打开<code>计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\xxxxxxxxxxxx(电脑蓝牙地址)\yyyyyyyyyyyy(设备蓝牙地址)</code></p>
+<p>键盘耳机和鼠标的格式是不同的，键盘耳机只有1个值，而鼠标有多个值</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">40bc6000e11a（耳机）</td>
+<td>F20CDD8DF01BF99FEB47562D599B49CF</td>
+</tr>
+<tr>
+<td align="left">f47335018ee1（键盘）</td>
+<td>33A06F0D773700CA15CBF78B1A98547B</td>
+</tr>
+<tr>
+<td align="left">ee1ba5528714（鼠标）</td>
+<td>LTK    0d 54 8f ff 18 74 7d 62 bf fa 1b 8f aa db 85 fa<br />ERand    52357797c221d5b7(5923772378556519863)<br />EDIV    0x9b5b(39771)<br />CSRK    89 3d 96 32 3f 23 95 3d 0a ed e1 25 a8 2a 15 7a<br />IRK    c9 14 31 12 48 f2 9c ad 95 1f 35 10 26 09 ec 2d</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="Linux下更改蓝牙信息"><a href="#Linux下更改蓝牙信息" class="headerlink" title="Linux下更改蓝牙信息"></a>Linux下更改蓝牙信息</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line"><span class="built_in">cd</span> /var/lib/bluetooth/xxxxxxxxxxxx(电脑蓝牙地址)/yyyyyyyyyyyy(设备蓝牙地址)</span><br><span class="line">nano info</span><br></pre></td></tr></table></figure>
+
+<p>对于蓝牙键盘（罗技K380）和蓝牙耳机（Beats），只需修改[LinkKey]的Key为windows注册表中的数据</p>
+<p>对于蓝牙鼠标，就要麻烦很多了</p>
+<p>参数对应表：</p>
+<table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LTK</td>
+<td>[LongTermKey] Key</td>
+</tr>
+<tr>
+<td>IRK</td>
+<td>[IdentityResolvingKey] Key</td>
+</tr>
+<tr>
+<td>CSRK</td>
+<td>[LocalSignatureKey] Key</td>
+</tr>
+<tr>
+<td>EDIV</td>
+<td>[LongTermKey] EDiv</td>
+</tr>
+<tr>
+<td>ERand</td>
+<td>[LongTermKey] Rand</td>
+</tr>
+</tbody></table>
+<p>LTK IRK CSRK 都只是简单的去掉分隔符并转换为大写</p>
+<p>EDIV 和 ERand 需要从十六进制转换为十进制，且Erand大小端倒序</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Erand=bd f5 1f 15 57 9e ee 72 转换</span></span><br><span class="line"><span class="built_in">echo</span> $((<span class="number">16</span>#$(echo bd,f5,<span class="number">1</span>f,<span class="number">15</span>,<span class="number">57</span>,<span class="number">9</span>e,ee,<span class="number">72</span>|tr , &#x27;\n&#x27;|tac|tr -d &#x27;\n&#x27;)))</span><br><span class="line"><span class="comment"># 8281730861634680253</span></span><br></pre></td></tr></table></figure>
+
+<p>还有1个坑就是蓝牙鼠标在Linux和Windows下地址不一样，需要改成Windows下的地址<code>mv EE\:14\:AC\:4B\:87\:14/ EE\:15\:AB\:4C\:87\:14/</code></p>
+<h2 id="重启蓝牙"><a href="#重启蓝牙" class="headerlink" title="重启蓝牙"></a>重启蓝牙</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart bluetooth</span><br></pre></td></tr></table></figure>
+
+<p>现在可以双系统使用蓝牙了</p>
+<h2 id="Linux下读取Windows注册表"><a href="#Linux下读取Windows注册表" class="headerlink" title="Linux下读取Windows注册表"></a>Linux下读取Windows注册表</h2><p><code>chntpw</code>可以读取windows注册表</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chntpw -e SYSTEM</span><br><span class="line"><span class="comment"># SYSTEM是Windows/System32/config/SYSTEM</span></span><br><span class="line">&gt; <span class="built_in">cd</span> ControlSet001\Services\BTHPORT\Parameters\Keys</span><br><span class="line">&gt; ls</span><br><span class="line">&gt; <span class="built_in">cd</span> xxxx</span><br><span class="line">&gt; ls</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/255509/bluetooth-pairing-on-dual-boot-of-windows-linux-mint-ubuntu-stop-having-to-p">蓝牙键盘配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.nanpuyue.com/2018/040.html">蓝牙鼠标配置</a></p>
+<blockquote>
+<p>附：</p>
+</blockquote>
+<p>蓝牙鼠标最终配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name=Designer Mouse</span><br><span class="line">Appearance=0x03c2</span><br><span class="line">AddressType=static</span><br><span class="line">SupportedTechnologies=LE;</span><br><span class="line">Trusted=true</span><br><span class="line">Blocked=false</span><br><span class="line">WakeAllowed=true</span><br><span class="line">Services=00001800-0000-1000-8000-00805f9b34fb;00001801-0000-1000-8000-00805f9b34fb;0000180a-0000-1000-8000-00805f9b34fb;0000180f-0000-1000-8000-00805f9b34fb;00001812-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[IdentityResolvingKey]</span><br><span class="line">Key=C914311248F29CAD951F35102609EC2D</span><br><span class="line"></span><br><span class="line">[LocalSignatureKey]</span><br><span class="line">Key=3725EEE88672FA5FA44BE1AE73E02D2D</span><br><span class="line">Counter=0</span><br><span class="line">Authenticated=false</span><br><span class="line"></span><br><span class="line">[LongTermKey]</span><br><span class="line">Key=3308537B8470C8931AE20AF3F5BDAE0D</span><br><span class="line">Authenticated=0</span><br><span class="line">EncSize=16</span><br><span class="line">EDiv=41248</span><br><span class="line">Rand=8281730861634680253</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source=2</span><br><span class="line">Vendor=1118</span><br><span class="line">Product=2053</span><br><span class="line">Version=288</span><br><span class="line"></span><br><span class="line">[ConnectionParameters]</span><br><span class="line">MinInterval=6</span><br><span class="line">MaxInterval=6</span><br><span class="line">Latency=60</span><br><span class="line">Timeout=300</span><br><span class="line"></span><br><span class="line">[ServiceChanged]</span><br><span class="line">CCC_LE=2</span><br></pre></td></tr></table></figure>
+
+<p>蓝牙键盘最终配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name=Keyboard K380</span><br><span class="line">Class=0x000540</span><br><span class="line">SupportedTechnologies=BR/EDR;</span><br><span class="line">Trusted=true</span><br><span class="line">Blocked=false</span><br><span class="line">WakeAllowed=true</span><br><span class="line">Services=00001000-0000-1000-8000-00805f9b34fb;00001124-0000-1000-8000-00805f9b34fb;00001200-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[LinkKey]</span><br><span class="line">Key=33A06F0D773700CA15CBF78B1A98547B</span><br><span class="line">Type=5</span><br><span class="line">PINLength=0</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source=2</span><br><span class="line">Vendor=1133</span><br><span class="line">Product=45890</span><br><span class="line">Version=16897</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8}});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

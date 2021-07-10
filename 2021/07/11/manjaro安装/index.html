@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Manjaro安装 - Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="Manjaro Reinstall安装
+分区
+
+格式    挂载点    标签
+fat16(windows)   /boot/efi   bootext4    /
+配置
+换源
+
+12345sudo,"> 
+    <meta name="author" content="Lee"> 
+    <link rel="alternative" href="atom.xml" title="Blog" type="application/atom+xml"> 
+    
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">Manjaro安装</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Manjaro安装</h1>
+        <div class="stuff">
+            <span>七月 11, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Manjaro/" rel="tag">Manjaro</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="Manjaro-Reinstall"><a href="#Manjaro-Reinstall" class="headerlink" title="Manjaro Reinstall"></a>Manjaro Reinstall</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
+<p>分区</p>
+</blockquote>
+<p>格式    挂载点    标签</p>
+<p>fat16(windows)   /boot/efi   boot<br>ext4    /</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>换源</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank</span><br><span class="line">sudo pacman -Syyu</span><br><span class="line"></span><br><span class="line">sudo pacman -S vim  proxychains zsh wget git typora yay</span><br><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br><span class="line">sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入法</p>
+</blockquote>
+<p>安装fcitx5（输入法框架）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx5-im</span><br></pre></td></tr></table></figure>
+
+<p>配置fcitx5的环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.pam_environment</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=\@im=fcitx5</span><br></pre></td></tr></table></figure>
+
+<p>安装fcitx5-rime（输入法引擎）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx5-rime</span><br></pre></td></tr></table></figure>
+
+<p>安装rime-cloverpinyin（输入方案）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S rime-cloverpinyin</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<p>创建并写入rime-cloverpinyin的输入方案：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.local/share/fcitx5/rime/default.custom.yaml</span><br></pre></td></tr></table></figure>
+
+<p>内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">patch:</span><br><span class="line">  &quot;menu/page_size&quot;: 8</span><br><span class="line">  schema_list:</span><br><span class="line">    - schema: clover</span><br></pre></td></tr></table></figure>
+
+<p>安装中文维基百科词库：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yay -S fcitx5-pinyin-zhwiki-rime</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux">wiki</a></p>
+<blockquote>
+<p>代理</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chromium --proxy-server=&quot;socks5://127.0.0.1:51837&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/proxychains.conf</span><br><span class="line"><span class="comment">#末尾加上</span></span><br><span class="line">	socks5 127.0.0.1 51837</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>zsh</p>
+</blockquote>
+<p>更换bash为zsh</p>
+<p>安装ohmyzsh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+<p>安装zsh-syntax-highlighting：提供命令高亮</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
+<p>安装autosuggestions：记住之前使用过的命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim .zshrc</span><br><span class="line"></span><br><span class="line">	plugins=(git zsh-syntax-highlighting zsh-autosuggestions extract)</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> .zshrc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yay -S thefuck</span><br><span class="line"><span class="comment"># .zshrc中source $ZSH/oh-my-zsh.sh下一行</span></span><br><span class="line">	<span class="built_in">eval</span> $(thefuck --<span class="built_in">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>软件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yay -S ranger</span><br><span class="line">yay -S deepin.com.qq.im.light <span class="comment"># yay下载失败了，去应用商店下可以</span></span><br><span class="line">yay -S wqy-microhei wqy-zenhei <span class="comment"># 缺失字体，不然上面的QQ会乱码</span></span><br><span class="line">yay -S wps-office ttf-wps-fonts wps-office-mui-zh-cn <span class="comment"># AUR源选择wps-office-cn(这样下载更快)，目前fcitx5不需要改配置文件就可以输入中文了</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>美化</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yay -S latte-dock</span><br><span class="line"><span class="comment"># 登录开启数字锁</span></span><br><span class="line"><span class="comment"># 安装systemd-numlockontty</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> numLockOnTty.service</span><br></pre></td></tr></table></figure>
+
+<p>设置-&gt;工作空间行为-&gt;桌面特效</p>
+<p>破碎、魔灯</p>
+<p>修改用户文件夹名称为英文：</p>
+<p>先去手动修改文件夹名称，然后在 设置 -&gt; 应用程序 -&gt; 地点 修改</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64960991">Re：从零开始的Manjaro配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/114296129">Manjaro-KDE配置全攻略</a></p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8}});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

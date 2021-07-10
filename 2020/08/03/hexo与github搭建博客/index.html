@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>hexo与github搭建博客 - Blog</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Blog,"> 
+    <meta name="description" content="hexo与github搭建博客nodejs下载nodejs，manjaro自带nodejs无需下载
+123456789# 查看版本node -vnpm -v# 淘宝镜像源npm config set,"> 
+    <meta name="author" content="Lee"> 
+    <link rel="alternative" href="atom.xml" title="Blog" type="application/atom+xml"> 
+    
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">Blog</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">hexo与github搭建博客</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">hexo与github搭建博客</h1>
+        <div class="stuff">
+            <span>八月 03, 2020</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="hexo与github搭建博客"><a href="#hexo与github搭建博客" class="headerlink" title="hexo与github搭建博客"></a>hexo与github搭建博客</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p>下载nodejs，manjaro自带nodejs无需下载</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line"><span class="comment"># 淘宝镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 查看配置信息</span></span><br><span class="line">npm config list</span><br><span class="line"><span class="comment"># 恢复</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h2><p>新建文件夹hexo</p>
+<p>在新建文件夹中安装hexo</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装脚手架</span></span><br><span class="line">sudo npm install hexo-cli -g</span><br><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line"><span class="comment"># sudo npm install hexo --save</span></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo初始化"><a href="#hexo初始化" class="headerlink" title="hexo初始化"></a>hexo初始化</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化hexo仓库，在所选文件夹中创建一个blog的文件夹，并把 hexo 相关代码下载到这个文件夹中</span></span><br><span class="line">hexo init blog </span><br><span class="line"><span class="comment"># proxychains hexo init blog 克隆成功，但检出失败，或许是github下载太慢，强制代理后一下子就下好了</span></span><br><span class="line"><span class="comment"># 现在已经有blog这个文件夹了</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="comment"># 安装hexo相关组件</span></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo init 当前文件夹一步到位</span></span><br><span class="line"><span class="comment"># 直接hexo init，在当前文件夹下初始化，注意当前文件夹为空文件夹</span></span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo使用"><a href="#hexo使用" class="headerlink" title="hexo使用"></a>hexo使用</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 本地运行</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h2 id="git设置"><a href="#git设置" class="headerlink" title="git设置"></a>git设置</h2><p>新建仓库名<code>username.github.io</code></p>
+<p>settings===&gt;GitHub Pages===&gt;Choose a theme(等会儿有内容后才可以选)</p>
+<blockquote>
+<p>git配置</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置个人信息</span></span><br><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 生成ssh</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;xx@email.com&quot;</span></span><br><span class="line"><span class="comment"># 没要密码，就按三次回车</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Linux ssh_agent</span></span><br><span class="line"><span class="comment"># 让ssh_agent在后台运行</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span> </span><br><span class="line"><span class="comment"># 添加生成的SSH KEY </span></span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br><span class="line"><span class="comment"># 显示公钥</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Windows ssh_agent</span></span><br><span class="line"><span class="comment"># Powershell 管理员模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set the sshd service to be started automatically</span></span><br><span class="line"><span class="comment">## Get-Service -Name ssh-agent | Set-Service -StartupType Automatic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># By default the ssh-agent service is disabled. Allow it to be manually started for the next step to work.</span></span><br><span class="line"><span class="comment"># Make sure you&#x27;re running as an Administrator.</span></span><br><span class="line"><span class="comment">## Get-Service ssh-agent | Set-Service -StartupType Manual</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start the service</span></span><br><span class="line"><span class="built_in">Start-Service</span> ssh<span class="literal">-agent</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This should return a status of Running</span></span><br><span class="line"><span class="built_in">Get-Service</span> ssh<span class="literal">-agent</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Now load your key files into ssh-agent</span></span><br><span class="line">ssh<span class="literal">-add</span> ~\.ssh\id_ed25519</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>添加ssh密钥到github</p>
+</blockquote>
+<p>GitHub===&gt;settings===&gt;SSH and GPG keys===&gt;New SSH key===&gt;粘贴公钥===&gt;Add SSH key</p>
+<blockquote>
+<p>检查ssh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment"># 输出：Hi xxx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装拓展插件来帮助连接仓库</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地仓库与github连接"><a href="#本地仓库与github连接" class="headerlink" title="本地仓库与github连接"></a>本地仓库与github连接</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改最后的deploy</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:xxx/xxx.github.io.git</span> <span class="comment"># 仓库的ssh地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h2><p>在blog文件夹下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;article&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者在blog/source/_posts下新建md文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 发布</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="博客配置"><a href="#博客配置" class="headerlink" title="博客配置"></a>博客配置</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> </span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><blockquote>
+<p>更换diaspora主题</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Fechin/hexo-theme-diaspora">diaspora GitHub</a></p>
+<p>新建文章模板</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: My awesome title</span><br><span class="line">date: 2016-10-12 18:38:45</span><br><span class="line">categories: </span><br><span class="line">    - 分类1</span><br><span class="line">    - 分类2</span><br><span class="line">tags: </span><br><span class="line">    - 标签1</span><br><span class="line">    - 标签2</span><br><span class="line">mp3: http://domain.com/awesome.mp3</span><br><span class="line">cover: http://domain.com/awesome.jpg</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改模板</p>
+</blockquote>
+<p>新建文章时，<code>Hexo</code> 会根据 <code>scaffold</code> 来建立文件。默认的模板有三种 draft.md 、 page.md 和 post.md。</p>
+<p>修改post.md如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">    -</span> category</span><br><span class="line">tags: </span><br><span class="line"><span class="bullet">    -</span> tag</span><br><span class="line">cover: /img/cover.png</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装看板娘"><a href="#安装看板娘" class="headerlink" title="安装看板娘"></a>安装看板娘</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-helper-live2d --save</span><br><span class="line"><span class="comment"># shizuku</span></span><br><span class="line">npm install live2d-widget-model-shizuku</span><br><span class="line"><span class="comment"># miku</span></span><br><span class="line">npm install live2d-widget-model-miku</span><br></pre></td></tr></table></figure>
+
+<p>根目录<code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">    <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span></span><br><span class="line">    <span class="attr">pluginJsPath:</span> <span class="string">lib/</span></span><br><span class="line">    <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">    <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">log:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#显示什么角色 </span></span><br><span class="line">    <span class="attr">model:</span></span><br><span class="line">    	<span class="attr">use:</span> <span class="string">live2d-widget-model-shizuku</span></span><br><span class="line">    <span class="comment">#显示位置和大小 </span></span><br><span class="line">    <span class="attr">display:</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">        <span class="attr">width:</span> <span class="number">150</span></span><br><span class="line">        <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">    <span class="attr">mobile:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">react:</span></span><br><span class="line">        <span class="comment">#透明度,1为不透明</span></span><br><span class="line">        <span class="attr">opacity:</span> <span class="number">0.8</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="添加README-md"><a href="#添加README-md" class="headerlink" title="添加README.md"></a>添加README.md</h2><p>在根目录source下新建README.md</p>
+<p>根目录<code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> <span class="string">README.md</span></span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.8}});</script></body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>

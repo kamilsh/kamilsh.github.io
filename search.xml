@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Manjaro开机挂载NTFS硬盘</title>
+    <url>/2020/08/17/Manjaro%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD%E7%A1%AC%E7%9B%98/</url>
+    <content><![CDATA[<h1 id="Manjaro开机挂载NTFS硬盘"><a href="#Manjaro开机挂载NTFS硬盘" class="headerlink" title="Manjaro开机挂载NTFS硬盘"></a>Manjaro开机挂载NTFS硬盘</h1><p>因为是装的双系统，不可能把NTFS格式的硬盘转换成ext4格式，所以利用<code>ntfs-3g</code>（在Manjaro中已默认安装）挂载NTFS格式硬盘</p>
+<blockquote>
+<p>查看需要挂载的硬盘信息</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo fdisk -l</span><br><span class="line">sudo blkid -o list</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Disk /dev/sda：931.51 GiB，1000204886016 字节，1953525168 个扇区</span><br><span class="line">磁盘型号：</span><br><span class="line">单元：扇区 / 1 * 512 = 512 字节</span><br><span class="line">扇区大小(逻辑/物理)：512 字节 / 4096 字节</span><br><span class="line">I/O 大小(最小/最佳)：4096 字节 / 4096 字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">磁盘标识符：</span><br><span class="line"></span><br><span class="line">设备             起点       末尾       扇区   大小 类型</span><br><span class="line">/dev/sda1        2048 1030387711 1030385664 491.3G Microsoft 基本数据</span><br><span class="line">/dev/sda2  1030387712 1644793855  614406144   293G Microsoft 基本数据</span><br><span class="line">/dev/sda3  1644795904 1926375423  281579520 134.3G Microsoft 基本数据</span><br><span class="line">/dev/sda4  1926377472 1953523711   27146240  12.9G Microsoft 基本数据</span><br></pre></td></tr></table></figure>
+
+<p>挂载/dev/sda1,2,3</p>
+<blockquote>
+<p>查看uuid</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ls -l /dev/disk/by-uuid/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 628CC26D8CC23AF5 -&gt; ../../sda1</span><br><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 2A361FCA361F95C3 -&gt; ../../sda2</span><br><span class="line">lrwxrwxrwx 1 root root 10  8月 17 15:34 0C80F25880F2482A -&gt; ../../sda3</span><br></pre></td></tr></table></figure>
+
+<p>所以对应uuid：628CC26D8CC23AF5; 2A361FCA361F95C3；0C80F25880F2482A</p>
+<blockquote>
+<p>编辑/etc/fstab</p>
+</blockquote>
+<p>新建一个~/data文件夹，将sda1挂载在这个地方</p>
+<p>fstab中添加</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">挂载分区的位置		挂载点分区		格式  		设置         备份		自检</span><br><span class="line">&lt;file system&gt;		&lt;mout point&gt;	&lt;type&gt;		&lt;options&gt;	&lt;dump&gt;		&lt;pass&gt; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">UUID=628CC26D8CC23AF5 /home/kami/data          ntfs    defaults 0 0</span><br><span class="line"><span class="comment"># 注意空格这些，可以复制上一行的数据改，观察Kate打开的高亮，和上面不一样就是有问题（比如我第一次的就把data ntfs defaults 识别成了一个目录...）</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>收尾</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo mount -a</span><br></pre></td></tr></table></figure>
+
+<p>不报错就没问题</p>
+<p>另外几个分区同理挂载即可</p>
+<p>最后重启</p>
+<p>参考资料：</p>
+<p><a href="https://blog.csdn.net/weixin_43840399/article/details/93475915">Manjaro开机挂载NTFS硬盘</a></p>
+<p><a href="%5Bhttps://wiki.archlinux.org/index.php/NTFS-3G_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)%5D(https://wiki.archlinux.org/index.php/NTFS-3G_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)">NTFS-3G</a></p>
+<p><a href="https://achuan.io/2020-04-09-Manjaro-KDE.html">Manjaro KDE 调教日记</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Manjaro添加日语输入法</title>
+    <url>/2020/08/03/Manjaro%E6%B7%BB%E5%8A%A0%E6%97%A5%E8%AF%AD%E8%BE%93%E5%85%A5%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="下载日语包"><a href="#下载日语包" class="headerlink" title="下载日语包"></a>下载日语包</h2><p>系统设置 本地化设定 添加日语</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yay -S fcitx5-mozc</span><br></pre></td></tr></table></figure>
+
+<p>注销 重新登录</p>
+<h2 id="配置当前输入法"><a href="#配置当前输入法" class="headerlink" title="配置当前输入法"></a>配置当前输入法</h2><p>发现已经有Mozc了</p>
+<p>但是需要右键点击右上角的键盘——输入法——选择，才可以切换</p>
+<p>成功しました？</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>附加组件——输入法选择器——配置——全局选择——切换至第？个输入法快捷键ctrl+？</p>
+<p>目前：</p>
+<p>ctrl+1——中文</p>
+<p>ctrl+2——日本語</p>
+<p>ctrl+3——english</p>
+<p>也可以按shift切换英文</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Japanese</tag>
+        <tag>Manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Windows下切换cuda版本</title>
+    <url>/2021/07/11/Windows%E4%B8%8B%E5%88%87%E6%8D%A2cuda%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<h1 id="Windows下切换cuda版本"><a href="#Windows下切换cuda版本" class="headerlink" title="Windows下切换cuda版本"></a>Windows下切换cuda版本</h1><blockquote>
+<p>查看现在cuda版本</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nvcc --version</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更改系统环境</p>
+</blockquote>
+<p>更改CUDA_PATH和NVCUDASAMPLES_ROOT为需要的版本</p>
+<p>更改PATH的CUDA版本顺序，把需要的上移到前面</p>
+<blockquote>
+<p>在Pytorch中查看cuda版本</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="built_in">print</span>(torch.version.cuda)</span><br><span class="line"><span class="comment"># print(torch.cuda_version)也可以</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jupyter notebook添加更改内核</title>
+    <url>/2021/07/11/jupyter%20notebook%E6%B7%BB%E5%8A%A0%E5%86%85%E6%A0%B8/</url>
+    <content><![CDATA[<h1 id="jupyter-notebook添加更改内核"><a href="#jupyter-notebook添加更改内核" class="headerlink" title="jupyter notebook添加更改内核"></a>jupyter notebook添加更改内核</h1><h2 id="Windows10"><a href="#Windows10" class="headerlink" title="Windows10"></a>Windows10</h2><blockquote>
+<p>添加内核</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">python -m ipykernel install --user --name 环境名称 --display-name <span class="string">&quot;Python (环境名称)&quot;</span></span><br><span class="line"><span class="comment"># --name 环境名称(这个是文件夹名)</span></span><br><span class="line"><span class="comment"># --display-name &quot;Python (环境名称)（这个是解释器名）</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>查看内核</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">jupyter kernelspec list</span><br><span class="line"><span class="comment"># ipython kernelspec list 将会被废弃</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Available kernels:</span><br><span class="line">  python3.7.8    C:\Users\57211\AppData\Roaming\jupyter\kernels\python3.7.8</span><br><span class="line">  pytorch1.6     C:\Users\57211\AppData\Roaming\jupyter\kernels\pytorch1.6</span><br><span class="line">  python3        c:\users\57211\appdata\<span class="built_in">local</span>\programs\python\python37\share\jupyter\kernels\python3</span><br></pre></td></tr></table></figure>
+
+<p>进入相应目录可以更改对应的json文件</p>
+<p><strong>但是注意不要在浏览器的notebook里pip install，因为浏览器中pip list出的是系统的python，或许是因为notebook的路径下只能找到系统的python。而在pycharm里pip list 就是当前内核的python环境，因为pycharm能自动激活相应的虚拟环境。</strong></p>
+<blockquote>
+<p>终端进入虚拟环境</p>
+</blockquote>
+<p>进入虚拟环境所在目录的Scripts文件夹下，执行<code>activate</code></p>
+<p>激活</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> .\workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="Manjaro-Linux"><a href="#Manjaro-Linux" class="headerlink" title="Manjaro Linux"></a>Manjaro Linux</h2><p>使用anaconda来管理环境了</p>
+<p><code>conda activate [env name]</code>后<code>python -m ipykernel install --user --name 环境名称 --display-name &quot;Python (环境名称)&quot;</code></p>
+<p>配置到了<code>~/.local/share/jupyter/kernels/</code>位置</p>
+<p>激活</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda activate xx</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Pycharm中运行jupyter-notebook"><a href="#Pycharm中运行jupyter-notebook" class="headerlink" title="Pycharm中运行jupyter notebook"></a>Pycharm中运行jupyter notebook</h2><p>用Pycharm打开ipynb文件——&gt;终端输入jupyter notebook，复制URL——&gt;点击<em>配置jupyter服务器</em>——&gt;输入<em>配置的服务器</em>从终端复制的URL</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo与github搭建博客</title>
+    <url>/2020/08/03/hexo%E4%B8%8Egithub%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="hexo与github搭建博客"><a href="#hexo与github搭建博客" class="headerlink" title="hexo与github搭建博客"></a>hexo与github搭建博客</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p>下载nodejs，manjaro自带nodejs无需下载</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line"><span class="comment"># 淘宝镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line"><span class="comment"># 查看配置信息</span></span><br><span class="line">npm config list</span><br><span class="line"><span class="comment"># 恢复</span></span><br><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h2><p>新建文件夹hexo</p>
+<p>在新建文件夹中安装hexo</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装脚手架</span></span><br><span class="line">sudo npm install hexo-cli -g</span><br><span class="line"><span class="comment"># 安装hexo</span></span><br><span class="line"><span class="comment"># sudo npm install hexo --save</span></span><br><span class="line"><span class="comment"># 查看版本</span></span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo初始化"><a href="#hexo初始化" class="headerlink" title="hexo初始化"></a>hexo初始化</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 初始化hexo仓库，在所选文件夹中创建一个blog的文件夹，并把 hexo 相关代码下载到这个文件夹中</span></span><br><span class="line">hexo init blog </span><br><span class="line"><span class="comment"># proxychains hexo init blog 克隆成功，但检出失败，或许是github下载太慢，强制代理后一下子就下好了</span></span><br><span class="line"><span class="comment"># 现在已经有blog这个文件夹了</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line"><span class="comment"># 安装hexo相关组件</span></span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo init 当前文件夹一步到位</span></span><br><span class="line"><span class="comment"># 直接hexo init，在当前文件夹下初始化，注意当前文件夹为空文件夹</span></span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo使用"><a href="#hexo使用" class="headerlink" title="hexo使用"></a>hexo使用</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 编译</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 本地运行</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h2 id="git设置"><a href="#git设置" class="headerlink" title="git设置"></a>git设置</h2><p>新建仓库名<code>username.github.io</code></p>
+<p>settings===&gt;GitHub Pages===&gt;Choose a theme(等会儿有内容后才可以选)</p>
+<blockquote>
+<p>git配置</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置个人信息</span></span><br><span class="line">git config --global user.name <span class="string">&quot;&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 生成ssh</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;xx@email.com&quot;</span></span><br><span class="line"><span class="comment"># 没要密码，就按三次回车</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Linux ssh_agent</span></span><br><span class="line"><span class="comment"># 让ssh_agent在后台运行</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(ssh-agent -s)</span>&quot;</span> </span><br><span class="line"><span class="comment"># 添加生成的SSH KEY </span></span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br><span class="line"><span class="comment"># 显示公钥</span></span><br><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Windows ssh_agent</span></span><br><span class="line"><span class="comment"># Powershell 管理员模式</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set the sshd service to be started automatically</span></span><br><span class="line"><span class="comment">## Get-Service -Name ssh-agent | Set-Service -StartupType Automatic</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># By default the ssh-agent service is disabled. Allow it to be manually started for the next step to work.</span></span><br><span class="line"><span class="comment"># Make sure you&#x27;re running as an Administrator.</span></span><br><span class="line"><span class="comment">## Get-Service ssh-agent | Set-Service -StartupType Manual</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start the service</span></span><br><span class="line"><span class="built_in">Start-Service</span> ssh<span class="literal">-agent</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># This should return a status of Running</span></span><br><span class="line"><span class="built_in">Get-Service</span> ssh<span class="literal">-agent</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Now load your key files into ssh-agent</span></span><br><span class="line">ssh<span class="literal">-add</span> ~\.ssh\id_ed25519</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>添加ssh密钥到github</p>
+</blockquote>
+<p>GitHub===&gt;settings===&gt;SSH and GPG keys===&gt;New SSH key===&gt;粘贴公钥===&gt;Add SSH key</p>
+<blockquote>
+<p>检查ssh</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment"># 输出：Hi xxx! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>安装拓展插件来帮助连接仓库</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地仓库与github连接"><a href="#本地仓库与github连接" class="headerlink" title="本地仓库与github连接"></a>本地仓库与github连接</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改最后的deploy</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:xxx/xxx.github.io.git</span> <span class="comment"># 仓库的ssh地址</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h2><p>在blog文件夹下</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">hexo new post <span class="string">&quot;article&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者在blog/source/_posts下新建md文件</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 清理</span></span><br><span class="line">hexo clean</span><br><span class="line"><span class="comment"># 生成</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># 发布</span></span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="博客配置"><a href="#博客配置" class="headerlink" title="博客配置"></a>博客配置</h2><p>打开blog的<code>config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">title:</span> </span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> </span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><blockquote>
+<p>更换diaspora主题</p>
+</blockquote>
+<p><a href="https://github.com/Fechin/hexo-theme-diaspora">diaspora GitHub</a></p>
+<p>新建文章模板</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: My awesome title</span><br><span class="line">date: 2016-10-12 18:38:45</span><br><span class="line">categories: </span><br><span class="line">    - 分类1</span><br><span class="line">    - 分类2</span><br><span class="line">tags: </span><br><span class="line">    - 标签1</span><br><span class="line">    - 标签2</span><br><span class="line">mp3: http://domain.com/awesome.mp3</span><br><span class="line">cover: http://domain.com/awesome.jpg</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改模板</p>
+</blockquote>
+<p>新建文章时，<code>Hexo</code> 会根据 <code>scaffold</code> 来建立文件。默认的模板有三种 draft.md 、 page.md 和 post.md。</p>
+<p>修改post.md如下：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories: </span><br><span class="line"><span class="bullet">    -</span> category</span><br><span class="line">tags: </span><br><span class="line"><span class="bullet">    -</span> tag</span><br><span class="line">cover: /img/cover.png</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装看板娘"><a href="#安装看板娘" class="headerlink" title="安装看板娘"></a>安装看板娘</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">npm install hexo-helper-live2d --save</span><br><span class="line"><span class="comment"># shizuku</span></span><br><span class="line">npm install live2d-widget-model-shizuku</span><br><span class="line"><span class="comment"># miku</span></span><br><span class="line">npm install live2d-widget-model-miku</span><br></pre></td></tr></table></figure>
+
+<p>根目录<code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">    <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span></span><br><span class="line">    <span class="attr">pluginJsPath:</span> <span class="string">lib/</span></span><br><span class="line">    <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">    <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">log:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment">#显示什么角色 </span></span><br><span class="line">    <span class="attr">model:</span></span><br><span class="line">    	<span class="attr">use:</span> <span class="string">live2d-widget-model-shizuku</span></span><br><span class="line">    <span class="comment">#显示位置和大小 </span></span><br><span class="line">    <span class="attr">display:</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">        <span class="attr">width:</span> <span class="number">150</span></span><br><span class="line">        <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">    <span class="attr">mobile:</span></span><br><span class="line">        <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">react:</span></span><br><span class="line">        <span class="comment">#透明度,1为不透明</span></span><br><span class="line">        <span class="attr">opacity:</span> <span class="number">0.8</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="添加README-md"><a href="#添加README-md" class="headerlink" title="添加README.md"></a>添加README.md</h2><p>在根目录source下新建README.md</p>
+<p>根目录<code>_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">skip_render:</span> <span class="string">README.md</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>configuration</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Manjaro安装</title>
+    <url>/2021/07/11/manjaro%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="Manjaro-Reinstall"><a href="#Manjaro-Reinstall" class="headerlink" title="Manjaro Reinstall"></a>Manjaro Reinstall</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
+<p>分区</p>
+</blockquote>
+<p>格式    挂载点    标签</p>
+<p>fat16(windows)   /boot/efi   boot<br>ext4    /</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>换源</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -m rank</span><br><span class="line">sudo pacman -Syyu</span><br><span class="line"></span><br><span class="line">sudo pacman -S vim  proxychains zsh wget git typora yay</span><br><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br><span class="line">sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>输入法</p>
+</blockquote>
+<p>安装fcitx5（输入法框架）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yay -S fcitx5-im</span><br></pre></td></tr></table></figure>
+
+<p>配置fcitx5的环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim ~/.pam_environment</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">INPUT_METHOD  DEFAULT=fcitx5</span><br><span class="line">GTK_IM_MODULE DEFAULT=fcitx5</span><br><span class="line">QT_IM_MODULE  DEFAULT=fcitx5</span><br><span class="line">XMODIFIERS    DEFAULT=\@im=fcitx5</span><br></pre></td></tr></table></figure>
+
+<p>安装fcitx5-rime（输入法引擎）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yay -S fcitx5-rime</span><br></pre></td></tr></table></figure>
+
+<p>安装rime-cloverpinyin（输入方案）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yay -S rime-cloverpinyin</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<p>创建并写入rime-cloverpinyin的输入方案：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nano ~/.local/share/fcitx5/rime/default.custom.yaml</span><br></pre></td></tr></table></figure>
+
+<p>内容为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">patch:</span><br><span class="line">  &quot;menu/page_size&quot;: 8</span><br><span class="line">  schema_list:</span><br><span class="line">    - schema: clover</span><br></pre></td></tr></table></figure>
+
+<p>安装中文维基百科词库：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yay -S fcitx5-pinyin-zhwiki-rime</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux">wiki</a></p>
+<blockquote>
+<p>代理</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chromium --proxy-server=&quot;socks5://127.0.0.1:51837&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">vim /etc/proxychains.conf</span><br><span class="line"><span class="comment">#末尾加上</span></span><br><span class="line">	socks5 127.0.0.1 51837</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>zsh</p>
+</blockquote>
+<p>更换bash为zsh</p>
+<p>安装ohmyzsh</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh</span><br></pre></td></tr></table></figure>
+
+<p>安装zsh-syntax-highlighting：提供命令高亮</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
+<p>安装autosuggestions：记住之前使用过的命令</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">vim .zshrc</span><br><span class="line"></span><br><span class="line">	plugins=(git zsh-syntax-highlighting zsh-autosuggestions extract)</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> .zshrc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yay -S thefuck</span><br><span class="line"><span class="comment"># .zshrc中source $ZSH/oh-my-zsh.sh下一行</span></span><br><span class="line">	<span class="built_in">eval</span> $(thefuck --<span class="built_in">alias</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>软件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yay -S ranger</span><br><span class="line">yay -S deepin.com.qq.im.light <span class="comment"># yay下载失败了，去应用商店下可以</span></span><br><span class="line">yay -S wqy-microhei wqy-zenhei <span class="comment"># 缺失字体，不然上面的QQ会乱码</span></span><br><span class="line">yay -S wps-office ttf-wps-fonts wps-office-mui-zh-cn <span class="comment"># AUR源选择wps-office-cn(这样下载更快)，目前fcitx5不需要改配置文件就可以输入中文了</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>美化</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">yay -S latte-dock</span><br><span class="line"><span class="comment"># 登录开启数字锁</span></span><br><span class="line"><span class="comment"># 安装systemd-numlockontty</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> numLockOnTty.service</span><br></pre></td></tr></table></figure>
+
+<p>设置-&gt;工作空间行为-&gt;桌面特效</p>
+<p>破碎、魔灯</p>
+<p>修改用户文件夹名称为英文：</p>
+<p>先去手动修改文件夹名称，然后在 设置 -&gt; 应用程序 -&gt; 地点 修改</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://zhuanlan.zhihu.com/p/64960991">Re：从零开始的Manjaro配置</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/114296129">Manjaro-KDE配置全攻略</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Scoop安装及配置</title>
+    <url>/2021/07/11/scoop%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h1 id="Scoop安装及配置"><a href="#Scoop安装及配置" class="headerlink" title="Scoop安装及配置"></a>Scoop安装及配置</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>先开全局模式，以免连接中断</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Set-ExecutionPolicy RemoteSigned -scope CurrentUser <span class="comment"># 开权限</span></span><br><span class="line">Invoke-Expression (New-Object System.Net.WebClient).DownloadString(<span class="string">&#x27;https://get.scoop.sh&#x27;</span>) <span class="comment"># 下载安装</span></span><br></pre></td></tr></table></figure>
+
+<p>更多参考<a href="https://scoop.sh/">官网</a>,软件默认安装在用户目录的scoop文件夹下</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">scoop checkup <span class="comment"># 检查潜在的问题</span></span><br><span class="line">	scoop install 7zip</span><br><span class="line">	scoop install innounp</span><br><span class="line">	scoop install dark</span><br><span class="line"><span class="comment"># 设置代理</span></span><br><span class="line">scoop config proxy 127.0.0.1:51837</span><br><span class="line"><span class="comment"># 移除代理</span></span><br><span class="line"><span class="comment"># scoop config rm proxy</span></span><br><span class="line"><span class="comment"># 查看可识别的bucket</span></span><br><span class="line">scoop bucket known</span><br><span class="line"><span class="comment"># 添加bucket</span></span><br><span class="line">scoop bucket add extras</span><br><span class="line">scoop bucket add nerd-fonts</span><br><span class="line"><span class="comment"># 查看已有bucket</span></span><br><span class="line">scoop bucket list</span><br><span class="line"><span class="comment"># 安装软件</span></span><br><span class="line">scoop install aria2</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/hongdada/p/11844277.html">Window包管理工具Scoop</a></p>
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>configuration</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>windows terminal设置alias别名</title>
+    <url>/2021/07/11/windows%20terminal%E8%AE%BE%E7%BD%AEalias/</url>
+    <content><![CDATA[<h1 id="windows-terminal设置alias别名"><a href="#windows-terminal设置alias别名" class="headerlink" title="windows terminal设置alias别名"></a>windows terminal设置alias别名</h1><ol>
+<li><p>打开 PowerShell ，运行 <code>echo $profile</code>，会输出一个文件路径，创建这个文件。</p>
+</li>
+<li><p>用notepad++打开这个文件，按如下格式设置别名：</p>
+</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">alias</span>别名 &#123;命令&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nb</span></span> &#123;jupyter notebook&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>（第一次更改后打开terminal会报错）以管理员身份打开 PowerShell，执行 <code>Set-ExecutionPolicy RemoteSigned</code>。</li>
+<li>重启Powershell</li>
+</ol>
+<p><strong>文件代码</strong></p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> nb &#123;jupyter notebook&#125;</span><br><span class="line"><span class="keyword">function</span> da &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tor &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\pytorch\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tf &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\tensorflow\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> de &#123;deactivate&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Windows</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用mpv在线播放B站大会员专享</title>
+    <url>/2021/07/11/%E4%BD%BF%E7%94%A8mpv%E5%9C%A8%E7%BA%BF%E6%92%AD%E6%94%BEB%E7%AB%99%E5%A4%A7%E4%BC%9A%E5%91%98%E4%B8%93%E4%BA%AB/</url>
+    <content><![CDATA[<h1 id="使用mpv在线播放B站大会员专享"><a href="#使用mpv在线播放B站大会员专享" class="headerlink" title="使用mpv在线播放B站大会员专享"></a>使用mpv在线播放B站大会员专享</h1><blockquote>
+<p> 安装工具</p>
+</blockquote>
+<p><code>you-get</code></p>
+<p> <code>mpv</code> </p>
+<p><code>Get cookie.txt</code> chrome插件</p>
+<blockquote>
+<p> 获取cookie.txt</p>
+</blockquote>
+<p>使用大会员帐号登录B站，用<code>Get cookie.txt</code>插件导出cookie.txt</p>
+<blockquote>
+<p>you-get解析真实地址</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># you-get &lt;视频地址&gt; -c &lt;cookie文件地址&gt; -i</span></span><br><span class="line">you-get -c /xx/bilibili.com_cookies.txt -i https://www.bilibili.com/video/avxx</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">you-get -c /xx/bilibili.com_cookies.txt -u https://www.bilibili.com/video/av754994469 --format=dash-flv_p60</span><br></pre></td></tr></table></figure>
+
+<p>解析出来两个链接，第一个是视频链接，第二个是音频链接</p>
+<blockquote>
+<p>mpv播放</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">mpv --no-ytdl --http-header-fields=<span class="string">&quot;referer: https://www.bilibili.com&quot;</span> video_url --audio-file=audio_url</span><br><span class="line"><span class="comment"># 链接不用带引号</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>mpv快捷键</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[</td>
+<td>0.9091倍速播放</td>
+</tr>
+<tr>
+<td>]</td>
+<td>1.1倍速播放</td>
+</tr>
+<tr>
+<td>.</td>
+<td>下一帧</td>
+</tr>
+<tr>
+<td>,</td>
+<td>上一帧</td>
+</tr>
+<tr>
+<td>9或/</td>
+<td>音量-2</td>
+</tr>
+<tr>
+<td>0或*</td>
+<td>音量+2</td>
+</tr>
+<tr>
+<td>f</td>
+<td>切换全屏</td>
+</tr>
+<tr>
+<td>up</td>
+<td>快进60秒</td>
+</tr>
+<tr>
+<td>down</td>
+<td>后退60秒</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实操</p>
+</blockquote>
+<p>观看番剧</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取番剧信息</span></span><br><span class="line">you-get -c /home/kami/data/data/backup/bilibili.com_cookies.txt -i https://www.bilibili.com/bangumi/play/ep341209 [--playlist]</span><br><span class="line"><span class="comment"># 获取真实地址</span></span><br><span class="line">you-get -c /home/kami/data/data/backup/bilibili.com_cookies.txt -u https://www.bilibili.com/bangumi/play/ep341209 --format=dash-hdflv2 [--playlist]</span><br><span class="line"><span class="comment"># 加上--playlist会解析当前番剧所有集数的地址，只看某一集就不用加，直接解析那一集的url即可</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">mpv --no-ytdl --http-header-fields=<span class="string">&quot;referer: https://www.bilibili.com&quot;</span> video_url --audio-file=audio_url</span><br></pre></td></tr></table></figure>
+
+<p>成功播放！</p>
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://wiki.archlinux.org/index.php/Bilibili_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E4%BD%BF%E7%94%A8_you-get_%E5%92%8C_mpv">Bilibili (简体中文)</a></p>
+<p><a href="https://fspark.me/archives/Linux-mpv-bilibili-bangumi-you-get.html">Linux下用mpv在B站看番（二）：you-get</a></p>
+<p><a href="https://mazhuang.org/wiki/mpv/">mpv快捷键</a></p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双系统共用蓝牙</title>
+    <url>/2021/07/11/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%85%B1%E7%94%A8%E8%93%9D%E7%89%99/</url>
+    <content><![CDATA[<h1 id="双系统共用蓝牙"><a href="#双系统共用蓝牙" class="headerlink" title="双系统共用蓝牙"></a>双系统共用蓝牙</h1><h2 id="配对蓝牙"><a href="#配对蓝牙" class="headerlink" title="配对蓝牙"></a>配对蓝牙</h2><ul>
+<li>Linux配对蓝牙，然后在Windows上配对蓝牙</li>
+</ul>
+<h2 id="Windows下记录蓝牙信息"><a href="#Windows下记录蓝牙信息" class="headerlink" title="Windows下记录蓝牙信息"></a>Windows下记录蓝牙信息</h2><ul>
+<li><p>下载PSTools工具并解压</p>
+</li>
+<li><p>管理员身份运行cmd</p>
+</li>
+<li><p>cd至PSTools文件夹</p>
+</li>
+<li><p>输入<code>Psexec64.exe -s -i regedit</code>打开注册表</p>
+</li>
+<li><p>打开<code>计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\xxxxxxxxxxxx(电脑蓝牙地址)\yyyyyyyyyyyy(设备蓝牙地址)</code></p>
+<p>键盘耳机和鼠标的格式是不同的，键盘耳机只有1个值，而鼠标有多个值</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">40bc6000e11a（耳机）</td>
+<td>F20CDD8DF01BF99FEB47562D599B49CF</td>
+</tr>
+<tr>
+<td align="left">f47335018ee1（键盘）</td>
+<td>33A06F0D773700CA15CBF78B1A98547B</td>
+</tr>
+<tr>
+<td align="left">ee1ba5528714（鼠标）</td>
+<td>LTK    0d 54 8f ff 18 74 7d 62 bf fa 1b 8f aa db 85 fa<br />ERand    52357797c221d5b7(5923772378556519863)<br />EDIV    0x9b5b(39771)<br />CSRK    89 3d 96 32 3f 23 95 3d 0a ed e1 25 a8 2a 15 7a<br />IRK    c9 14 31 12 48 f2 9c ad 95 1f 35 10 26 09 ec 2d</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="Linux下更改蓝牙信息"><a href="#Linux下更改蓝牙信息" class="headerlink" title="Linux下更改蓝牙信息"></a>Linux下更改蓝牙信息</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">su</span><br><span class="line"><span class="built_in">cd</span> /var/lib/bluetooth/xxxxxxxxxxxx(电脑蓝牙地址)/yyyyyyyyyyyy(设备蓝牙地址)</span><br><span class="line">nano info</span><br></pre></td></tr></table></figure>
+
+<p>对于蓝牙键盘（罗技K380）和蓝牙耳机（Beats），只需修改[LinkKey]的Key为windows注册表中的数据</p>
+<p>对于蓝牙鼠标，就要麻烦很多了</p>
+<p>参数对应表：</p>
+<table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LTK</td>
+<td>[LongTermKey] Key</td>
+</tr>
+<tr>
+<td>IRK</td>
+<td>[IdentityResolvingKey] Key</td>
+</tr>
+<tr>
+<td>CSRK</td>
+<td>[LocalSignatureKey] Key</td>
+</tr>
+<tr>
+<td>EDIV</td>
+<td>[LongTermKey] EDiv</td>
+</tr>
+<tr>
+<td>ERand</td>
+<td>[LongTermKey] Rand</td>
+</tr>
+</tbody></table>
+<p>LTK IRK CSRK 都只是简单的去掉分隔符并转换为大写</p>
+<p>EDIV 和 ERand 需要从十六进制转换为十进制，且Erand大小端倒序</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Erand=bd f5 1f 15 57 9e ee 72 转换</span></span><br><span class="line"><span class="built_in">echo</span> $((<span class="number">16</span>#$(echo bd,f5,<span class="number">1</span>f,<span class="number">15</span>,<span class="number">57</span>,<span class="number">9</span>e,ee,<span class="number">72</span>|tr , &#x27;\n&#x27;|tac|tr -d &#x27;\n&#x27;)))</span><br><span class="line"><span class="comment"># 8281730861634680253</span></span><br></pre></td></tr></table></figure>
+
+<p>还有1个坑就是蓝牙鼠标在Linux和Windows下地址不一样，需要改成Windows下的地址<code>mv EE\:14\:AC\:4B\:87\:14/ EE\:15\:AB\:4C\:87\:14/</code></p>
+<h2 id="重启蓝牙"><a href="#重启蓝牙" class="headerlink" title="重启蓝牙"></a>重启蓝牙</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">sudo systemctl restart bluetooth</span><br></pre></td></tr></table></figure>
+
+<p>现在可以双系统使用蓝牙了</p>
+<h2 id="Linux下读取Windows注册表"><a href="#Linux下读取Windows注册表" class="headerlink" title="Linux下读取Windows注册表"></a>Linux下读取Windows注册表</h2><p><code>chntpw</code>可以读取windows注册表</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">chntpw -e SYSTEM</span><br><span class="line"><span class="comment"># SYSTEM是Windows/System32/config/SYSTEM</span></span><br><span class="line">&gt; <span class="built_in">cd</span> ControlSet001\Services\BTHPORT\Parameters\Keys</span><br><span class="line">&gt; ls</span><br><span class="line">&gt; <span class="built_in">cd</span> xxxx</span><br><span class="line">&gt; ls</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>参考资料</p>
+</blockquote>
+<p><a href="https://unix.stackexchange.com/questions/255509/bluetooth-pairing-on-dual-boot-of-windows-linux-mint-ubuntu-stop-having-to-p">蓝牙键盘配置</a></p>
+<p><a href="https://blog.nanpuyue.com/2018/040.html">蓝牙鼠标配置</a></p>
+<blockquote>
+<p>附：</p>
+</blockquote>
+<p>蓝牙鼠标最终配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name=Designer Mouse</span><br><span class="line">Appearance=0x03c2</span><br><span class="line">AddressType=static</span><br><span class="line">SupportedTechnologies=LE;</span><br><span class="line">Trusted=true</span><br><span class="line">Blocked=false</span><br><span class="line">WakeAllowed=true</span><br><span class="line">Services=00001800-0000-1000-8000-00805f9b34fb;00001801-0000-1000-8000-00805f9b34fb;0000180a-0000-1000-8000-00805f9b34fb;0000180f-0000-1000-8000-00805f9b34fb;00001812-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[IdentityResolvingKey]</span><br><span class="line">Key=C914311248F29CAD951F35102609EC2D</span><br><span class="line"></span><br><span class="line">[LocalSignatureKey]</span><br><span class="line">Key=3725EEE88672FA5FA44BE1AE73E02D2D</span><br><span class="line">Counter=0</span><br><span class="line">Authenticated=false</span><br><span class="line"></span><br><span class="line">[LongTermKey]</span><br><span class="line">Key=3308537B8470C8931AE20AF3F5BDAE0D</span><br><span class="line">Authenticated=0</span><br><span class="line">EncSize=16</span><br><span class="line">EDiv=41248</span><br><span class="line">Rand=8281730861634680253</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source=2</span><br><span class="line">Vendor=1118</span><br><span class="line">Product=2053</span><br><span class="line">Version=288</span><br><span class="line"></span><br><span class="line">[ConnectionParameters]</span><br><span class="line">MinInterval=6</span><br><span class="line">MaxInterval=6</span><br><span class="line">Latency=60</span><br><span class="line">Timeout=300</span><br><span class="line"></span><br><span class="line">[ServiceChanged]</span><br><span class="line">CCC_LE=2</span><br></pre></td></tr></table></figure>
+
+<p>蓝牙键盘最终配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[General]</span><br><span class="line">Name=Keyboard K380</span><br><span class="line">Class=0x000540</span><br><span class="line">SupportedTechnologies=BR/EDR;</span><br><span class="line">Trusted=true</span><br><span class="line">Blocked=false</span><br><span class="line">WakeAllowed=true</span><br><span class="line">Services=00001000-0000-1000-8000-00805f9b34fb;00001124-0000-1000-8000-00805f9b34fb;00001200-0000-1000-8000-00805f9b34fb;</span><br><span class="line"></span><br><span class="line">[LinkKey]</span><br><span class="line">Key=33A06F0D773700CA15CBF78B1A98547B</span><br><span class="line">Type=5</span><br><span class="line">PINLength=0</span><br><span class="line"></span><br><span class="line">[DeviceID]</span><br><span class="line">Source=2</span><br><span class="line">Vendor=1133</span><br><span class="line">Product=45890</span><br><span class="line">Version=16897</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>configuration</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>Manjaro</tag>
+      </tags>
+  </entry>
+</search>
