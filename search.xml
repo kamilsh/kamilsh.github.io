@@ -368,7 +368,7 @@
 <li>重启Powershell</li>
 </ol>
 <p><strong>文件代码</strong></p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> nb &#123;jupyter notebook&#125;</span><br><span class="line"><span class="keyword">function</span> da &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tor &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\pytorch\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tf &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\tensorflow\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> de &#123;deactivate&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> nb &#123;jupyter notebook&#125;</span><br><span class="line"><span class="keyword">function</span> da &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> workplace\dataAnalysis\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tor &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\pytorch\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> tf &#123;</span><br><span class="line">H:</span><br><span class="line"><span class="built_in">cd</span> \</span><br><span class="line"><span class="built_in">cd</span> .\workplace\tensorflow\Scripts\</span><br><span class="line">.\activate</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> de &#123;deactivate&#125;</span><br><span class="line"><span class="keyword">function</span> code &#123;&amp; <span class="string">&#x27;C:\Users\57211\AppData\Local\Programs\Microsoft VS Code\Code.exe&#x27;</span> --proxy-server=<span class="string">&quot;socks5://127.0.0.1:51837&quot;</span> --host-resolver-rules=<span class="string">&quot;MAP * ~NOTFOUND , EXCLUDE 127.0.0.1&quot;</span>&#125;</span><br><span class="line"><span class="keyword">function</span> blog &#123;</span><br><span class="line">D:</span><br><span class="line"><span class="built_in">cd</span> \workplace\BLOG</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -580,6 +580,48 @@
       <tags>
         <tag>Windows</tag>
         <tag>Manjaro</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Anaconda安装cuda、cudnn、tensorflow</title>
+    <url>/2021/07/20/Anaconda%E5%AE%89%E8%A3%85cuda%E3%80%81cudnn%E3%80%81tensorflow/</url>
+    <content><![CDATA[<h1 id="Anaconda安装cuda、cudnn、tensorflow"><a href="#Anaconda安装cuda、cudnn、tensorflow" class="headerlink" title="Anaconda安装cuda、cudnn、tensorflow"></a>Anaconda安装cuda、cudnn、tensorflow</h1><p>在conda环境中安装cuda10.0、cudnn7.6.0、tensorflow1.13</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">conda install cudatoolkit=10.0.130</span><br><span class="line">conda install cudnn</span><br><span class="line"><span class="comment"># cudnn 7.6.5, build cuda10.0_0</span></span><br><span class="line">conda install tensorflow-gpu=1.15 keras=2.3</span><br><span class="line"><span class="comment"># tensorflow-gpu=1.15.0 keras=2.3.1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考：</p>
+<p><a href="https://yann-leguilly.gitlab.io/post/2019-10-08-tensorflow-and-cuda/">Installing TensorFlow with Anaconda for your GPU</a></p>
+]]></content>
+      <categories>
+        <category>category</category>
+      </categories>
+      <tags>
+        <tag>tag</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>conda配置及常用操作</title>
+    <url>/2021/07/20/conda%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h1 id="conda配置及常用操作"><a href="#conda配置及常用操作" class="headerlink" title="conda配置及常用操作"></a>conda配置及常用操作</h1><p>新建环境</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">conda create -n name python=x.x</span><br></pre></td></tr></table></figure>
+
+<p>添加镜像源</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/</span><br></pre></td></tr></table></figure>
+
+<p>查看channel</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">conda config --show channels</span><br></pre></td></tr></table></figure>
+
+<p>本地安装</p>
+<p>当因为网速问题下载失败后，用提示的链接通过浏览器下载，然后本地安装</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">conda install --use-local pkg_</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>category</category>
+      </categories>
+      <tags>
+        <tag>tag</tag>
       </tags>
   </entry>
 </search>
